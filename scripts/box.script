@@ -1,0 +1,21 @@
+local speed=5
+local destroy=false
+
+function init(self)
+	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, speed)
+	go.animate(go.get_id(), "euler.z", go.PLAYBACK_LOOP_FORWARD, 180, go.EASING_LINEAR, 5)
+	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 300, go.EASING_LINEAR, 5)
+end
+
+local function remove()
+	print("remove")
+	go.delete()
+end
+
+function update(self, dt)
+	
+	if not destroy and math.ceil(go.get(go.get_id(), "position.y"))<900 then
+		go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0,0,0), go.EASING_LINEAR, 2.0, 0, remove)
+		destroy=true
+	end
+end

@@ -105,7 +105,22 @@ embedded_instances {
 }
 embedded_instances {
   id: "player"
-  data: "embedded_components {\n"
+  data: "components {\n"
+  "  id: \"player1\"\n"
+  "  component: \"/scripts/player.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
   "  id: \"player\"\n"
   "  type: \"sprite\"\n"
   "  data: \"tile_set: \\\"/atlases/player.atlas\\\"\\n"
@@ -127,7 +142,7 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 540.0
+    x: 210.0
     y: 960.0
     z: 0.0
   }

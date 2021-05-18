@@ -1,0 +1,44 @@
+local back=false
+
+local function forward_animation(speed)
+	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 870, go.EASING_LINEAR, speed,0,
+	function() 
+		back_animation(2)
+		back=true
+	end)
+end
+
+function back_animation(speed)
+	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 210, go.EASING_LINEAR, speed,0,
+	function() 
+		forward_animation(2)
+		back=false
+	end)
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	forward_animation(2)
+end
+
+
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.pressed then
+		--Total distance is 660
+		if back then
+			local distance=go.get(go.get_id(), "position.x")-210
+			--Процент пройденной дистанции от общей
+			local perc=distance/660*100
+			local speed(2*perc/100)
+			print(speed)
+			back=false
+		else
+			local distance=870-go.get(go.get_id(), "position.x")
+			local perc=distance/660*100
+			local speed(2*perc/100)
+			print(speed)
+			back=true
+		end
+	end
+end

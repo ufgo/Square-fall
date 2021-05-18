@@ -1,9 +1,10 @@
 local back=false
+local player_speed=1
 
 local function forward_animation(speed)
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 870, go.EASING_LINEAR, speed,0,
 	function() 
-		back_animation(2)
+		back_animation(player_speed)
 		back=true
 	end)
 end
@@ -11,14 +12,15 @@ end
 function back_animation(speed)
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 210, go.EASING_LINEAR, speed,0,
 	function() 
-		forward_animation(2)
+		forward_animation(player_speed)
 		back=false
 	end)
 end
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	forward_animation(2)
+	go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(1,1,1), go.EASING_LINEAR, 0.2)
+	forward_animation(player_speed)
 end
 
 
@@ -30,14 +32,16 @@ function on_input(self, action_id, action)
 			local distance=go.get(go.get_id(), "position.x")-210
 			--Процент пройденной дистанции от общей
 			local perc=distance/660*100
-			local speed(2*perc/100)
+			local speed=player_speed*(100-perc)/100
 			print(speed)
+			forward_animation(speed)
 			back=false
 		else
 			local distance=870-go.get(go.get_id(), "position.x")
 			local perc=distance/660*100
-			local speed(2*perc/100)
+			local speed=player_speed*(100-perc)/100
 			print(speed)
+			back_animation(speed)
 			back=true
 		end
 	end

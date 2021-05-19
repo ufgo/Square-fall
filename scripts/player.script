@@ -1,5 +1,7 @@
 local back=false
 local player_speed=1
+local G=require("scripts.global")
+local score=0
 
 local function forward_animation(speed)
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 870, go.EASING_LINEAR, speed,0,
@@ -17,7 +19,23 @@ function back_animation(speed)
 	end)
 end
 
+local function game_over()
+	if not G.GetGameOver() then
+		go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0,0,0), go.EASING_LINEAR, 0.5)
+		go.cancel_animations(go.get_id(), "position.x")
+		go.set_position(go.get_position(go.get_id()),"particles")
+		particlefx.play("/particles#player_destroy")
+		G.SetGameOver(true)
+	end
+end
+
+local function add_score()
+	score=score+1
+	label.set_text("/score#label", score)
+end
+
 function init(self)
+	--particlefx.play("#player_destroy")
 	msg.post(".", "acquire_input_focus")
 	go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(1,1,1), go.EASING_LINEAR, 0.2)
 	forward_animation(player_speed)
@@ -51,9 +69,10 @@ function on_message(self, message_id, message, sender)
 		-- take action
 		if string.find(tostring(message.other_id), 'box') then
 			print ("collided with box")
+			game_over()
 		else
 			print("colided with good")
+			add_score()
 		end
-		
 	end
 end

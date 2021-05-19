@@ -19,3 +19,14 @@ function update(self, dt)
 		self.destroy=true
 	end
 end
+
+function on_message(self, message_id, message, sender)
+	-- check for the message
+	if message_id == hash("collision_response") then
+		-- take action
+		if string.find(tostring(message.other_id), 'player') then
+			remove(self)
+			self.destroy=true
+		end
+	end
+end

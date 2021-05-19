@@ -1,0 +1,9 @@
+
+local function spawn()
+	local box_ids=collectionfactory.create("#collectionfactory")
+	go.set_position(vmath.vector3(rnd.range(0,1080),1920,0),box_ids[hash("/box")])
+end
+
+function init(self)
+	timer.delay(5.0, true, spawn)
+end

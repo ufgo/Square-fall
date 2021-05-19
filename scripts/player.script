@@ -23,8 +23,6 @@ function init(self)
 	forward_animation(player_speed)
 end
 
-
-
 function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.pressed then
 		--Total distance is 660
@@ -33,16 +31,29 @@ function on_input(self, action_id, action)
 			--Процент пройденной дистанции от общей
 			local perc=distance/660*100
 			local speed=player_speed*(100-perc)/100
-			print(speed)
+			--print(speed)
 			forward_animation(speed)
 			back=false
 		else
 			local distance=870-go.get(go.get_id(), "position.x")
 			local perc=distance/660*100
 			local speed=player_speed*(100-perc)/100
-			print(speed)
+			--print(speed)
 			back_animation(speed)
 			back=true
 		end
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	-- check for the message
+	if message_id == hash("collision_response") then
+		-- take action
+		if string.find(tostring(message.other_id), 'box') then
+			print ("collided with box")
+		else
+			print("colided with good")
+		end
+		
 	end
 end

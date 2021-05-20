@@ -28,9 +28,10 @@ local function game_over()
 		go.set_position(go.get_position(go.get_id()),"particles")
 		particlefx.play("/particles#player_destroy")
 		print("end")
-		msg.post("main:/transition#transition", "slide_in_top",{url="/game"})
+		--msg.post("main:/transition#transition", "slide_in_top",{url="/game"})
 		G.SetGameOver(true)
 		timer.delay(2, false, function()monarch.show(hash("game"))end)
+		print(G.GetGameOver())
 	end
 end
 
@@ -40,6 +41,7 @@ local function add_score()
 end
 
 function init(self)
+	G.SetGameOver(false)
 	--particlefx.play("#player_destroy")
 	msg.post(".", "acquire_input_focus")
 	timer.delay(1, false, function()
@@ -73,12 +75,12 @@ end
 
 function on_message(self, message_id, message, sender)
 	-- check for the message
-	if message_id == hash("collision_response") then
+	if not G.GetGameOver() and message_id == hash("collision_response") then
 		-- take action
 		if string.find(tostring(message.other_id), 'box') then
 			print ("collided with box")
 			game_over()
-		else
+		elseif string.find(tostring(message.other_id), 'good') then
 			print("colided with good")
 			add_score()
 		end

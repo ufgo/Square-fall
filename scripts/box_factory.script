@@ -9,5 +9,4 @@ end
 
 function init(self)
 	timer.delay(1, false, function()timer.delay(1.0, true, spawn)end)
-	
 end

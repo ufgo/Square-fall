@@ -2,6 +2,13 @@ name: "game"
 scale_along_z: 0
 embedded_instances {
   id: "container"
+  children: "boxfactory"
+  children: "frame"
+  children: "goodfactory"
+  children: "particles"
+  children: "player"
+  children: "player_bar"
+  children: "score"
   data: "components {\n"
   "  id: \"transition\"\n"
   "  component: \"/scripts/transition.script\"\n"

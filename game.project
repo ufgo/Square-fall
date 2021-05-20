@@ -17,6 +17,7 @@ use_accelerometer = 0
 width = 1080
 height = 1920
 samples = 10
+high_dpi = 1
 
 [ios]
 app_icon_120x120 = /assets/app_icons/icon_120.png
@@ -56,4 +57,9 @@ texture_profiles = /my.texture_profiles
 [yagames]
 sdk_init_options = { orientation: { value: "portrait", lock: true } }
 service_worker_url = sw.js
+
+[html5]
+cssfile = /builtins/manifests/web/dark_theme.css
+show_fullscreen_button = 0
+show_made_with_defold = 0
 

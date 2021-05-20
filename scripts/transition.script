@@ -1,13 +1,19 @@
-local function slide_in_top(url)
-	go.animate(url, "position.y", go.PLAYBACK_ONCE_FORWARD, 5000, go.EASING_LINEAR, 2)
+local monarch = require "monarch.monarch"
+
+local function slide_in_top()
+	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 3000, go.EASING_LINEAR, 1, 0, 
+	function() monarch.show(hash("game")) end)
+	
 end
 
 function init(self)
+	print(msg.url())
 	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 1.0)
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("slide_in_top") then
+		slide_in_top()
 		print("ok!")
 	end
 end

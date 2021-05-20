@@ -1,7 +1,10 @@
 local speed=5
 local destroy=false
+local G=require("scripts.global")
+local isGameOver=false
 
 function init(self)
+	self.isGameOver=false
 	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, speed)
 	go.animate(go.get_id(), "euler.z", go.PLAYBACK_LOOP_FORWARD, 180, go.EASING_LINEAR, rnd.range(3,7))
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, rnd.range(0,1080), go.EASING_LINEAR, 5)
@@ -16,5 +19,14 @@ function update(self, dt)
 		go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0,0,0), 
 		go.EASING_LINEAR, 2.0, 0, remove)
 		self.destroy=true
+	end
+	if not isGameOver and G.GetGameOver() then
+		go.cancel_animations(go.get_id(), "position.y")
+		go.cancel_animations(go.get_id(), "position.x")
+		go.cancel_animations(go.get_id(), "scale")
+		go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0,0,0), 
+		go.EASING_LINEAR, 0.2, 0, remove)
+		self.destroy=true
+		self.isGameOver=true
 	end
 end

@@ -1,0 +1,13 @@
+local yagames = require("yagames.yagames")
+
+local function init_handler(self, err)
+	if err then
+		print("Something bad happened :(", err)
+	else
+		msg.post("main:/yandex#yandex_ads", "show_fullscreen_adv")
+	end
+end
+
+function init(self)
+	yagames.init(init_handler)
+end

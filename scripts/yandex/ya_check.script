@@ -1,0 +1,13 @@
+local sitelock = require("yagames.sitelock")
+local G=require("scripts.global")
+-- Also you can add your domains:
+-- sitelock.add_domain("yourdomainname.com")
+
+function init(self)
+	if html5 and sitelock.is_release_build() then
+		if not sitelock.verify_domain() then
+			-- Show warning and pause the game
+			G.setBadDomain(true)
+		end
+	end
+end

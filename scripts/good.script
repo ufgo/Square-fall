@@ -13,7 +13,7 @@ local function remove(self)
 end
 
 function update(self, dt)	
-	if not self.destroy and math.ceil(go.get(go.get_id(), "position.y"))<900 then
+	if not self.destroy and math.ceil(go.get(go.get_id(), "position.y"))<1000 then
 		go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0,0,0), 
 		go.EASING_LINEAR, 2.0, 0, remove)
 		self.destroy=true

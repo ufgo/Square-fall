@@ -8,6 +8,6 @@ local function spawn()
 end
 
 function init(self)
-	timer.delay(5.0, true, spawn)
+	timer.delay(1, false, function()timer.delay(5.0, true, spawn)end)
 end
 

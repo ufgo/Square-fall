@@ -1,0 +1,35 @@
+local yagames = require("yagames.yagames")
+--local defsave = require("defsave.defsave")
+
+local function adv_open(self)
+	if not defsave.get("save", "musicoff") then
+		sound.set_gain("main:/media#game_over", 0)
+		sound.set_gain("main:/media#sound", 0)
+	end
+end
+
+local function adv_close(self, was_shown)
+	if not defsave.get("save", "musicoff") then
+		sound.set_gain("main:/media#game_over", 1)
+		sound.set_gain("main:/media#sound", 1)
+	end
+end
+
+local function adv_offline(self)
+	-- Internet is offline
+end
+
+local function adv_error(self, err)
+	-- Something wrong happened :(
+end
+
+function on_message(self, message_id, message)
+	if message_id == hash("show_fullscreen_adv") then
+		yagames.adv_show_fullscreen_adv({
+			open = adv_open,
+			close = adv_close,
+			offline = adv_offline,
+			error = adv_error
+		})
+	end
+end

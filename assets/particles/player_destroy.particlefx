@@ -67,7 +67,7 @@ emitters {
     key: EMITTER_KEY_PARTICLE_LIFE_TIME
     points {
       x: 0.0
-      y: 1.8
+      y: 5.8
       t_x: 1.0
       t_y: 0.0
     }
@@ -91,7 +91,7 @@ emitters {
       t_x: 1.0
       t_y: 0.0
     }
-    spread: 0.0
+    spread: 10.0
   }
   properties {
     key: EMITTER_KEY_PARTICLE_RED
@@ -295,7 +295,7 @@ modifiers {
   use_direction: 0
   position {
     x: 0.0
-    y: 104.0
+    y: 322.0
     z: 0.0
   }
   rotation {

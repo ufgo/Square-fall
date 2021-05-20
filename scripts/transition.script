@@ -1,0 +1,15 @@
+local function slide_in_top(url)
+	go.animate(url, "position.y", go.PLAYBACK_ONCE_FORWARD, 5000, go.EASING_LINEAR, 2)
+end
+
+function init(self)
+	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 1.0)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("slide_in_top") then
+		print("ok!")
+	end
+end
+
+

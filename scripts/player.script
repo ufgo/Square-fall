@@ -2,6 +2,8 @@ local back=false
 local player_speed=1
 local G=require("scripts.global")
 local score=0
+local monarch = require "monarch.monarch"
+
 
 local function forward_animation(speed)
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 870, go.EASING_LINEAR, speed,0,
@@ -25,7 +27,10 @@ local function game_over()
 		go.cancel_animations(go.get_id(), "position.x")
 		go.set_position(go.get_position(go.get_id()),"particles")
 		particlefx.play("/particles#player_destroy")
+		print("end")
+		msg.post("main:/transition#transition", "slide_in_top",{url="/game"})
 		G.SetGameOver(true)
+		timer.delay(2, false, function()monarch.show(hash("game"))end)
 	end
 end
 
@@ -37,8 +42,11 @@ end
 function init(self)
 	--particlefx.play("#player_destroy")
 	msg.post(".", "acquire_input_focus")
+	timer.delay(1, false, function()
 	go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(1,1,1), go.EASING_LINEAR, 0.2)
 	forward_animation(player_speed)
+end
+)
 end
 
 function on_input(self, action_id, action)

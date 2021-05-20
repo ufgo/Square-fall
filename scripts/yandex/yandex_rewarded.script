@@ -1,0 +1,29 @@
+local yagames = require("yagames.yagames")
+
+local function rewarded_open(self)
+	print("реклама открыта!")
+	msg.post("revive:/go#revive", "ad_start")
+end
+
+local function rewarded_rewarded(self)
+	print("Награда получена!")
+	msg.post("revive:/go#revive", "revive")
+end
+
+local function rewarded_close(self)
+end
+
+local function rewarded_error(self, err)
+	msg.post("revive:/go#revive", "ad_error")
+end
+
+function on_message(self, message_id, message)
+	if message_id == hash("show_rewarded_video") then
+		yagames.adv_show_rewarded_video({
+			open = rewarded_open,
+			rewarded = rewarded_rewarded,
+			close = rewarded_close,
+			error = rewarded_error
+		})
+	end
+end

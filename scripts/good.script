@@ -4,7 +4,7 @@ local destroy=false
 function init(self)
 	go.set("good#sprite", "tint", vmath.vector4(0, 0.8, 1, 1))
 	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, speed)
-	go.animate(go.get_id(), "euler.z", go.PLAYBACK_LOOP_FORWARD, 180, go.EASING_LINEAR, 5)
+	go.animate(go.get_id(), "euler.z", go.PLAYBACK_LOOP_FORWARD, 180, go.EASING_LINEAR, rnd.range(3,7))
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, rnd.range(210,870), go.EASING_LINEAR, 5)
 end
 

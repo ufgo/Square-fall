@@ -57,6 +57,3 @@ texture_profiles = /my.texture_profiles
 sdk_init_options = { orientation: { value: "portrait", lock: true } }
 service_worker_url = sw.js
 
-[native_extension]
-app_manifest = /generated.appmanifest
-

@@ -3,6 +3,9 @@ local destroy=false
 local G=require("scripts.global")
 local isGameOver=false
 
+go.property("good", true)
+
+
 function init(self)
 	self.isGameOver=false
 	go.set("good#sprite", "tint", vmath.vector4(0, 0.8, 1, 1))

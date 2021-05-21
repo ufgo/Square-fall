@@ -3,6 +3,8 @@ local destroy=false
 local G=require("scripts.global")
 local isGameOver=false
 
+go.property("good", false)
+
 function init(self)
 	self.isGameOver=false
 	speed=rnd.range(5,7)

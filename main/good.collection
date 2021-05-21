@@ -3,7 +3,7 @@ scale_along_z: 0
 embedded_instances {
   id: "good"
   data: "components {\n"
-  "  id: \"good\"\n"
+  "  id: \"box\"\n"
   "  component: \"/scripts/good.script\"\n"
   "  position {\n"
   "    x: 0.0\n"

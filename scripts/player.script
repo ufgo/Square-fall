@@ -76,12 +76,11 @@ end
 function on_message(self, message_id, message, sender)
 	-- check for the message
 	if not G.GetGameOver() and message_id == hash("collision_response") then
-		-- take action
-		if string.find(tostring(message.other_id), 'box') then
+		-- take action	
+		if not go.get(msg.url(nil, message.other_id, "box"),"good") then
 			print ("collided with box")
 			game_over()
-		elseif string.find(tostring(message.other_id), 'good') then
-			print("colided with good")
+		elseif go.get(msg.url(nil, message.other_id, "box"),"good") then
 			add_score()
 		end
 	end

@@ -4,6 +4,7 @@ local G=require("scripts.global")
 local score=0
 local monarch = require "monarch.monarch"
 local defsave = require("defsave.defsave")
+go.property("isplayer", true)
 
 local function forward_animation(speed)
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 870, go.EASING_LINEAR, speed,0,

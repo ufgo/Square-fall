@@ -4,6 +4,7 @@ local function spawn()
 	if not G.GetGameOver() then
 		local box_ids=collectionfactory.create("#collectionfactory")
 		go.set_position(vmath.vector3(rnd.range(0,1080),1920,0),box_ids[hash("/box")])
+		go.animate(box_ids[hash("/box")], "position.x", go.PLAYBACK_ONCE_FORWARD, go.get("/player", "position.x"), go.EASING_LINEAR, 5)
 	end
 end
 

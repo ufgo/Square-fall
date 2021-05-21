@@ -2,17 +2,9 @@ local yagames = require("yagames.yagames")
 --local defsave = require("defsave.defsave")
 
 local function adv_open(self)
-	if not defsave.get("save", "musicoff") then
-		sound.set_gain("main:/media#game_over", 0)
-		sound.set_gain("main:/media#sound", 0)
-	end
 end
 
 local function adv_close(self, was_shown)
-	if not defsave.get("save", "musicoff") then
-		sound.set_gain("main:/media#game_over", 1)
-		sound.set_gain("main:/media#sound", 1)
-	end
 end
 
 local function adv_offline(self)

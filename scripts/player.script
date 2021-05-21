@@ -3,7 +3,7 @@ local player_speed=1
 local G=require("scripts.global")
 local score=0
 local monarch = require "monarch.monarch"
-
+local defsave = require("defsave.defsave")
 
 local function forward_animation(speed)
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 870, go.EASING_LINEAR, speed,0,
@@ -31,7 +31,7 @@ local function game_over()
 		--msg.post("main:/transition#transition", "slide_in_top",{url="/game"})
 		G.SetGameOver(true)
 		timer.delay(2, false, function()msg.post("game:/container#transition", "slide_in_top")end)
-		print(G.GetGameOver())
+		G.SetScore(score)
 	end
 end
 
@@ -52,7 +52,7 @@ end
 end
 
 function on_input(self, action_id, action)
-	if not G.GetGameOver() and action_id == hash("touch") and action.pressed then
+	if not G.GetBadDomain() and not G.GetGameOver() and action_id == hash("touch") and action.pressed then
 		--Total distance is 660
 		if back then
 			local distance=go.get(go.get_id(), "position.x")-210

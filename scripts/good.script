@@ -6,9 +6,10 @@ local isGameOver=false
 function init(self)
 	self.isGameOver=false
 	go.set("good#sprite", "tint", vmath.vector4(0, 0.8, 1, 1))
+	speed=rnd.range(5,7)
 	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, speed)
-	go.animate(go.get_id(), "euler.z", go.PLAYBACK_LOOP_FORWARD, 180, go.EASING_LINEAR, rnd.range(3,7))
-	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, rnd.range(210,870), go.EASING_LINEAR, 5)
+	go.animate(go.get_id(), "euler.z", go.PLAYBACK_LOOP_FORWARD, 180, go.EASING_LINEAR, speed-2)
+	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, rnd.range(240,840), go.EASING_LINEAR, 5)
 end
 
 local function remove(self)
@@ -18,7 +19,7 @@ end
 function update(self, dt)	
 	if not self.destroy and math.ceil(go.get(go.get_id(), "position.y"))<1000 then
 		go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0,0,0), 
-		go.EASING_LINEAR, 2.0, 0, remove)
+		go.EASING_LINEAR, 1.0, 0, remove)
 		self.destroy=true
 	end
 

@@ -5,6 +5,7 @@ dependencies#1 = https://github.com/selimanac/defold-random/archive/master.zip
 dependencies#2 = https://github.com/indiesoftby/defold-sharp-sprite/archive/main.zip
 dependencies#3 = https://github.com/britzl/monarch/archive/master.zip
 dependencies#4 = https://github.com/indiesoftby/defold-yagames/archive/master.zip
+dependencies#5 = https://github.com/subsoap/defsave/archive/master.zip
 
 [bootstrap]
 main_collection = /main/main.collectionc

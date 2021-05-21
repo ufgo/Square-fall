@@ -1,14 +1,13 @@
 local monarch = require "monarch.monarch"
 
 local function slide_in_top()
-	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 3000, go.EASING_LINEAR, 1, 0, 
-	function() monarch.show(hash("game")) end)
-	
+	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 1920, go.EASING_LINEAR, 0.5, 0, 
+	function() monarch.show(hash("game_over")) end)
 end
 
 function init(self)
 	print(msg.url())
-	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 1.0)
+	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5)
 end
 
 function on_message(self, message_id, message, sender)

@@ -3,6 +3,7 @@ local transitions = require "monarch.transitions.gui"
 local G=require("scripts.global")
 local defsave = require("defsave.defsave")
 local ya_scores = require("scripts.yandex.ya_leaderboards")
+local best_score=0
 --local rxi_json = require("yagames.helpers.json")
 
 function init(self)
@@ -14,15 +15,16 @@ function init(self)
     
     gui.set_text(gui.get_node("score"), G.GetScore())
     
-    if defsave.get("save", "best")==nil or defsave.get("save", "best")<G.GetScore()  then
+    ya_scores.get_player_entry_handler()
+    
+    if best_score==nil or best_score<G.GetScore()  then
         defsave.set("save", "best", G.GetScore())
         gui.set_text(gui.get_node("top_score"), "Новый рекорд!")
-        defsave.save("save")
-    elseif defsave.get("save", "best")>0 then
-        gui.set_text(gui.get_node("top_score"), "ЛУЧШИЙ "..tostring(defsave.get("save", "best")))
+        ya_scores.set_score_handler(self, G.GetScore())
+    elseif best_score>0 then
+        gui.set_text(gui.get_node("top_score"), "ЛУЧШИЙ "..tostring(best_score))
     end 
 
-    print(ya_scores.get_player_entry_handler())
 end
 
 function final(self)
@@ -33,6 +35,10 @@ end
 
 function on_message(self, message_id, message, sender)
     self.transition.handle(message_id, message, sender)
+
+    if message_id == hash("best_score") then
+        best_score=message.score
+    end
 end
 
 function on_input(self, action_id, action)

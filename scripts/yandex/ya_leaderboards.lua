@@ -33,8 +33,11 @@ end
 
 function M.get_player_entry_handler(self)
     yagames.leaderboards_get_player_entry(TABLE_NAME, nil, function(self, err, result)
-        --msg.post("game_over:/go#game_over", "best_score",{score=result.score})
-        G.SetBestScore(result.score)
+        if not err then
+            msg.post("game_over:/go#game_over", "best_score",{score=result.score})
+        else
+            msg.post("game_over:/go#game_over", "best_score",{score=nil})
+        end
     end)
 end
 

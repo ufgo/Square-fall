@@ -3,7 +3,7 @@ local monarch = require "monarch.monarch"
 local defsave = require("defsave.defsave")
 
 function init(self)
-	print("Version: 23")
+	print("Version: 24")
 	window.center()
 	window.resize()
 	

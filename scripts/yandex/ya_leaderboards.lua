@@ -1,0 +1,50 @@
+local yagames = require("yagames.yagames")
+local G = require("scripts.global")
+
+local M = {}
+
+function M.init_handler(self, err)
+    yagames.leaderboards_init(function(self, err)
+        print("yagames.leaderboards_init:", err or "OK!")
+
+        if not err then
+            print("score init ok!")
+        else
+            print("some error in score:")
+            pprint(err)
+        end
+    end)
+end
+
+local TABLE_NAME = "top"
+
+function M.get_entries_handler(self)
+    local options = {
+        includeUser = true,
+        quantityAround = 10,
+        quantityTop = 10,
+        getAvatarSrc = "small",
+        getAvatarSrcSet = "large"
+    }
+    yagames.leaderboards_get_entries(TABLE_NAME, options, function(self, err, result)
+        return result
+    end)
+end
+
+function M.get_player_entry_handler(self)
+    yagames.leaderboards_get_player_entry(TABLE_NAME, nil, function(self, err, result)
+        --msg.post("game_over:/go#game_over", "best_score",{score=result.score})
+        G.SetBestScore(result.score)
+    end)
+end
+
+function M.set_score_handler(self,score)
+    yagames.leaderboards_set_score(TABLE_NAME, score, nil, function(self, err)
+        print("yagames.leaderboards_set_score:", err or tostring(score))
+    end)
+end
+
+function M.init(self)
+end
+
+return M

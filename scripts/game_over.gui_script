@@ -2,8 +2,11 @@ local monarch = require "monarch.monarch"
 local transitions = require "monarch.transitions.gui"
 local G=require("scripts.global")
 local defsave = require("defsave.defsave")
+local ya_scores = require("scripts.yandex.ya_leaderboards")
+--local rxi_json = require("yagames.helpers.json")
 
 function init(self)
+    print(msg.url())
     msg.post(".", "acquire_input_focus")
     self.transition = transitions.create() -- note that no node is passed to transition.create()!
     .show_in(gui.get_node("root"), transitions.slide_in_bottom, gui.EASING_OUTQUAD, 0.5, 0.1)
@@ -17,10 +20,9 @@ function init(self)
         defsave.save("save")
     elseif defsave.get("save", "best")>0 then
         gui.set_text(gui.get_node("top_score"), "ЛУЧШИЙ "..tostring(defsave.get("save", "best")))
-    end
-    
+    end 
 
-    
+    print(ya_scores.get_player_entry_handler())
 end
 
 function final(self)
@@ -34,14 +36,16 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
-    if action_id == hash("touch") and action.pressed then -- <2>
-        local btn_restart = gui.get_node("restart") 
+    if action_id == hash("touch") and action.pressed then
+        local btn_restart = gui.get_node("restart")
+        local btn_liderboard=gui.get_node("liderboard")
         if gui.pick_node(btn_restart, action.x, action.y) then 
             monarch.show(hash("game"))
         end
+        if gui.pick_node(btn_liderboard, action.x, action.y) then 
+            -- monarch.show(hash("liderboard"))  
+            ya_scores.get_entries_handler()  
+        end
     end
-end
-
-
-function on_reload(self)
+ 
 end

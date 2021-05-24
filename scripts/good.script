@@ -41,7 +41,7 @@ function on_message(self, message_id, message, sender)
 	-- check for the message
 	if message_id == hash("collision_response") then
 		-- take action
-		if go.get(msg.url(nil, message.other_id, "player1"),"isplayer") then
+		if go.get(msg.url(nil, message.other_id, "box"),"isplayer") then
 			remove(self)
 			self.destroy=true
 		end

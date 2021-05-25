@@ -27,16 +27,18 @@ function M.get_entries_handler(self)
         getAvatarSrcSet = "large"
     }
     yagames.leaderboards_get_entries(TABLE_NAME, options, function(self, err, result)
-        return result
+        if not err then
+            msg.post("liderboard:/go#liderboard", "set_liderboard", {result=result})
+        end
     end)
 end
 
 function M.get_player_entry_handler(self)
     yagames.leaderboards_get_player_entry(TABLE_NAME, nil, function(self, err, result)
         if not err then
-            msg.post("game_over:/go#game_over", "best_score",{score=result.score})
+            msg.post("game_over:/go#game_over", "ya_score",{score=result.score})
         else
-            msg.post("game_over:/go#game_over", "best_score",{score=nil})
+            msg.post("game_over:/go#game_over", "ya_score",{score=nil})
         end
     end)
 end

@@ -108,7 +108,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "10"
+  text: ""
   font: "score_big"
   id: "score"
   xanchor: XANCHOR_NONE
@@ -171,7 +171,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "\320\273\321\203\321\207\321\210\320\270\320\271 20"
+  text: ""
   font: "text"
   id: "top_score"
   xanchor: XANCHOR_NONE

@@ -3,8 +3,24 @@ local transitions = require "monarch.transitions.gui"
 local G=require("scripts.global")
 local defsave = require("defsave.defsave")
 local ya_scores = require("scripts.yandex.ya_leaderboards")
-local best_score=0
+local ya_score=0
 --local rxi_json = require("yagames.helpers.json")
+
+local function set_scores(score)
+    ya_score=score
+
+    print("ya_score = "..tostring(ya_score))
+    print("G.GetScore = "..tostring(G.GetScore()))
+
+    gui.set_text(gui.get_node("score"), tostring(G.GetScore()))
+
+    if G.GetScore()>ya_score or ya_score==nil then
+        ya_scores.set_score_handler(self, G.GetScore())
+        gui.set_text(gui.get_node("top_score"), "Новый рекорд!")
+    else
+        gui.set_text(gui.get_node("top_score"), "ЛУЧШИЙ "..tostring(ya_score))
+    end
+end
 
 function init(self)
     print(msg.url())
@@ -12,19 +28,8 @@ function init(self)
     self.transition = transitions.create() -- note that no node is passed to transition.create()!
     .show_in(gui.get_node("root"), transitions.slide_in_bottom, gui.EASING_OUTQUAD, 0.5, 0.1)
     .show_out(gui.get_node("root"), transitions.slide_out_top, gui.EASING_INQUAD, 0.5, 0)
-    
-    gui.set_text(gui.get_node("score"), G.GetScore())
-    
-    ya_scores.get_player_entry_handler()
-    
-    if best_score==nil or best_score<G.GetScore()  then
-        defsave.set("save", "best", G.GetScore())
-        gui.set_text(gui.get_node("top_score"), "Новый рекорд!")
-        ya_scores.set_score_handler(self, G.GetScore())
-    elseif best_score>0 then
-        gui.set_text(gui.get_node("top_score"), "ЛУЧШИЙ "..tostring(best_score))
-    end 
 
+    ya_scores.get_player_entry_handler()
 end
 
 function final(self)
@@ -36,8 +41,8 @@ end
 function on_message(self, message_id, message, sender)
     self.transition.handle(message_id, message, sender)
 
-    if message_id == hash("best_score") then
-        best_score=message.score
+    if message_id == hash("ya_score") then
+        set_scores(message.score)
     end
 end
 
@@ -49,8 +54,7 @@ function on_input(self, action_id, action)
             monarch.show(hash("game"))
         end
         if gui.pick_node(btn_liderboard, action.x, action.y) then 
-            -- monarch.show(hash("liderboard"))  
-            ya_scores.get_entries_handler()  
+            monarch.show(hash("liderboard"))
         end
     end
  

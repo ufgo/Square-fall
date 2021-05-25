@@ -4,10 +4,11 @@ local transitions = require "monarch.transitions.gui"
 function init(self)
     print(msg.url())
     msg.post(".", "acquire_input_focus")
-    self.transition = transitions.create() -- note that no node is passed to transition.create()!
-    .show_in(gui.get_node("logo"), transitions.slide_in_top, gui.EASING_OUTQUAD, 1.2, 0)
-
-    .show_out(gui.get_node("logo"), transitions.slide_out_top, gui.EASING_INQUAD, 1.2, 0)
+    self.transition = transitions.create(gui.get_node("logo"))
+    .show_in(transitions.slide_in_right, gui.EASING_OUTQUAD, 0.6, 0)
+    .show_out(transitions.slide_out_left, gui.EASING_INQUAD, 0.6, 0)
+    .back_in(transitions.slide_in_left, gui.EASING_OUTQUAD, 0.6, 0)
+    .back_out(transitions.slide_out_right, gui.EASING_INQUAD, 0.6, 0)
 end
 
 function final(self)

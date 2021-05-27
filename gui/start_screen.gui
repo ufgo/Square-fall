@@ -20,7 +20,7 @@ background_color {
 nodes {
   position {
     x: 540.0
-    y: 1190.0
+    y: 966.0
     z: 0.0
     w: 1.0
   }
@@ -31,8 +31,8 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 0.4
-    y: 0.4
+    x: 4.0
+    y: 4.0
     z: 1.0
     w: 1.0
   }
@@ -73,8 +73,8 @@ nodes {
 }
 nodes {
   position {
-    x: -11.0
-    y: 136.0
+    x: 0.0
+    y: 103.5
     z: 0.0
     w: 1.0
   }
@@ -137,7 +137,7 @@ nodes {
 nodes {
   position {
     x: 0.0
-    y: -313.0
+    y: 54.5
     z: 0.0
     w: 1.0
   }

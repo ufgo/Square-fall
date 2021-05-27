@@ -1,9 +1,12 @@
 local monarch = require "monarch.monarch"
-local ya_scores = require("scripts.yandex.ya_leaderboards")
+local transitions = require "monarch.transitions.gui"
 local users_txt={}
 local scores_txt={}
+local G = require("scripts.global")
+local ya_scores = require("scripts.yandex.ya_leaderboards")
 
 function init(self)
+    print(msg.url())
     msg.post(".", "acquire_input_focus")
     ya_scores.get_entries_handler(self)
 
@@ -11,12 +14,12 @@ function init(self)
         table.insert(users_txt, gui.get_node("login"..tostring(i)))
         table.insert(scores_txt, gui.get_node("score"..tostring(i)))
     end
-end
+    self.transition = transitions.create() -- note that no node is passed to transition.create()!
+    .show_in(gui.get_node("table"), transitions.slide_in_bottom, gui.EASING_INQUAD, 1.0, 0.0)
+    .show_out(gui.get_node("table"), transitions.slide_out_top, gui.EASING_INQUAD, 0.3, 0)
 
-function final(self)
-end
-
-function update(self, dt)
+    .show_in(gui.get_node("play"), transitions.scale_in, gui.EASING_OUTQUAD, 0.3, 1.0)
+    .show_out(gui.get_node("play"), transitions.scale_out, gui.EASING_INQUAD, 0.3, 0)
 end
 
 local function set_liderboard(result)
@@ -27,12 +30,17 @@ local function set_liderboard(result)
         gui.set_text(users_txt[k], v.player.publicName)
         gui.set_text(scores_txt[k], v.score)
         gui.set_text(gui.get_node("num"..tostring(k)), tostring(k)..".")
+
+        if gui.get_text(users_txt[k])=="" then
+            gui.set_text(users_txt[k], "Логин скрыт")
+        end
     end
 end
 
 function on_message(self, message_id, message, sender)
+    self.transition.handle(message_id, message, sender)
     if message_id==hash("set_liderboard") then
-        set_liderboard(message.result)
+        set_liderboard(G.GetLiderBoard())
     end
 end
 
@@ -43,7 +51,4 @@ function on_input(self, action_id, action)
             monarch.show(hash("game"))
         end
     end
-end
-
-function on_reload(self)
 end

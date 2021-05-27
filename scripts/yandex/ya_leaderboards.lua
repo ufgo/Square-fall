@@ -28,7 +28,8 @@ function M.get_entries_handler(self)
     }
     yagames.leaderboards_get_entries(TABLE_NAME, options, function(self, err, result)
         if not err then
-            msg.post("liderboard:/go#liderboard", "set_liderboard", {result=result})
+            G.setLiderBoard(result)
+            msg.post("liderboard:/go#liderboard", "set_liderboard")
         end
     end)
 end

@@ -2,7 +2,7 @@
 const cachePrefix = "lumber-chop";
 
 // 2. Increment the version every time you publish your game!
-const cacheName = cachePrefix + "-v34";
+const cacheName = cachePrefix + "-v40";
 
 const cacheList = [
     "https://yandex.ru/games/sdk/v2",
@@ -18,7 +18,7 @@ const cacheList = [
     "archive/game.arci0",
     "archive/game.dmanifest0",
     "archive/game.projectc0",
-    "archive/game.public. er0",
+    "archive/game.public.der0",
 ];
 
 // Installation of the service worker

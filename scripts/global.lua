@@ -4,6 +4,25 @@ local isGameOver=false
 local score=0
 local badDomain=false
 local best_score
+local lider_board={}
+local isHelp=true
+
+function M.GetHelp()
+	return isHelp
+end
+
+function M.setHelp(v)
+	isHelp=v
+end
+
+
+function M.GetLiderBoard()
+	return lider_board
+end
+
+function M.setLiderBoard(v)
+	lider_board=v
+end
 
 function M.GetBadDomain()
 	return badDomain

@@ -23,6 +23,7 @@ function back_animation(speed)
 end
 
 local function game_over()
+	
 	if not G.GetGameOver() then
 		go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0,0,0), go.EASING_LINEAR, 0.5)
 		go.cancel_animations(go.get_id(), "position.x")
@@ -31,7 +32,8 @@ local function game_over()
 		print("end")
 		--msg.post("main:/transition#transition", "slide_in_top",{url="/game"})
 		G.SetGameOver(true)
-		timer.delay(2, false, function()msg.post("game:/container#transition", "slide_in_top")end)
+		--timer.delay(2, false, function()msg.post("game:/container#transition", "slide_in_top")end)
+		timer.delay(2, false, function()monarch.show(hash("last_chance"))end)
 		G.SetScore(score)
 	end
 end

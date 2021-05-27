@@ -1,0 +1,31 @@
+local G = require("scripts.global")
+
+function init(self)
+	if G.GetHelp() then
+		label.set_text("#help_txt", "тап/клик для\nпереключения направления")
+		
+		go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
+		vmath.vector4(1,1,1,1), go.EASING_INOUTQUAD, 1.0,1,done)
+
+		go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
+		vmath.vector4(1,1,1,0), go.EASING_INOUTQUAD, 1.0,2)
+
+		go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
+		vmath.vector4(1,1,1,1), go.EASING_INOUTQUAD, 1.0,3)
+
+		go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
+		vmath.vector4(1,1,1,0), go.EASING_INOUTQUAD, 1.0,4)
+
+		go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
+		vmath.vector4(1,1,1,1), go.EASING_INOUTQUAD, 1.0,5)
+
+		go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
+		vmath.vector4(1,1,1,0), go.EASING_INOUTQUAD, 1.0,6)
+
+		timer.delay(3, false, function()label.set_text("#help_txt", "остерегайтесь белых квадратов")end)
+		timer.delay(5, false, function()
+			label.set_text("#help_txt", "собирайте голубые квадраты\nдля зарабатывания очков")
+			G.setHelp(false)
+		end)
+	end
+end

@@ -1,0 +1,33 @@
+local monarch = require "monarch.monarch"
+local transitions = require "monarch.transitions.gui"
+
+function init(self)
+    print(msg.url())
+    msg.post(".", "acquire_input_focus")
+    self.transition = transitions.create() -- note that no node is passed to transition.create()!
+    .show_in(gui.get_node("dialog"), transitions.scale_in, gui.EASING_OUTQUAD, 0.3, 0)
+    .show_out(gui.get_node("dialog"), transitions.scale_out, gui.EASING_INQUAD, 0.3, 0)
+end
+
+function final(self)
+end
+
+function update(self, dt)
+end
+
+function on_message(self, message_id, message, sender)
+    self.transition.handle(message_id, message, sender)
+end
+
+function on_input(self, action_id, action)
+    if action_id == hash("touch") and action.pressed then
+        local btn_yes=gui.get_node("yes")
+        local btn_no=gui.get_node("no")
+        if gui.pick_node(btn_yes, action.x, action.y) then 
+            print("yes")
+        end
+        if gui.pick_node(btn_no, action.x, action.y) then 
+            print("no")
+        end
+    end
+end

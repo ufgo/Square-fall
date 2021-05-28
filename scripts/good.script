@@ -27,6 +27,8 @@ function update(self, dt)
 	end
 
 	if not isGameOver and G.GetGameOver() then
+		go.delete(msg.url(nil, go.get_id(), "collisionobject"))
+		
 		go.cancel_animations(go.get_id(), "position.y")
 		go.cancel_animations(go.get_id(), "position.x")
 		go.cancel_animations(go.get_id(), "scale")

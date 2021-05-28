@@ -16,7 +16,10 @@ end
 
 local function remove(self)
 	go.delete(go.get_id())
+	--msg.post("game:/player#box", "game_over")
 end
+
+
 
 function update(self, dt)	
 	if not self.destroy and math.ceil(go.get(go.get_id(), "position.y"))<1000 then
@@ -25,6 +28,8 @@ function update(self, dt)
 		self.destroy=true
 	end
 	if not isGameOver and G.GetGameOver() then
+		go.delete(msg.url(nil, go.get_id(), "collisionobject"))
+		
 		go.cancel_animations(go.get_id(), "position.y")
 		go.cancel_animations(go.get_id(), "position.x")
 		go.cancel_animations(go.get_id(), "scale")

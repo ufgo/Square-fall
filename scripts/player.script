@@ -5,6 +5,7 @@ local score=0
 local monarch = require "monarch.monarch"
 local defsave = require("defsave.defsave")
 go.property("isplayer", true)
+local isLastChance=false
 
 local function forward_animation(speed)
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 870, go.EASING_LINEAR, speed,0,
@@ -22,18 +23,32 @@ function back_animation(speed)
 	end)
 end
 
+local function last_chance()
+	print("last_chance!")
+	go.set_position(vmath.vector3(210,960,0))
+	go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(1,1,1), go.EASING_LINEAR, 0.5,0.5)
+	forward_animation(player_speed)
+	G.SetGameOver(false)
+	isLastChance=true
+end
+
 local function game_over()
-	
 	if not G.GetGameOver() then
 		go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0,0,0), go.EASING_LINEAR, 0.5)
 		go.cancel_animations(go.get_id(), "position.x")
 		go.set_position(go.get_position(go.get_id()),"particles")
 		particlefx.play("/particles#player_destroy")
 		print("end")
-		--msg.post("main:/transition#transition", "slide_in_top",{url="/game"})
+		--
 		G.SetGameOver(true)
-		--timer.delay(2, false, function()msg.post("game:/container#transition", "slide_in_top")end)
-		timer.delay(2, false, function()monarch.show(hash("last_chance"))end)
+		--
+		if isLastChance then
+			--msg.post("main:/transition#transition", "slide_in_top",{url="/game"})
+			timer.delay(2, false, function()msg.post("game:/container#transition", "slide_in_top")end)
+		else
+			timer.delay(2, false, function()monarch.show(hash("last_chance"))end)
+		end
+		
 		G.SetScore(score)
 	end
 end
@@ -44,6 +59,7 @@ local function add_score()
 end
 
 function init(self)
+	print("player script: "..msg.url())
 	G.SetGameOver(false)
 	--particlefx.play("#player_destroy")
 	msg.post(".", "acquire_input_focus")
@@ -86,5 +102,10 @@ function on_message(self, message_id, message, sender)
 		elseif go.get(msg.url(nil, message.other_id, "box"),"good") then
 			add_score()
 		end
+	end
+	if message_id==hash("last_chance") then
+		last_chance()
+	elseif message_id==hash("game_over") then
+		game_over()
 	end
 end

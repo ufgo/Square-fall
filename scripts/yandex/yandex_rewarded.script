@@ -1,24 +1,28 @@
 local yagames = require("yagames.yagames")
+local isRewarded=false
 
 local function rewarded_open(self)
-	print("реклама открыта!")
-	msg.post("revive:/go#revive", "ad_start")
 end
 
 local function rewarded_rewarded(self)
-	print("Награда получена!")
-	msg.post("revive:/go#revive", "revive")
+	isRewarded=true
 end
 
 local function rewarded_close(self)
+	if isRewarded then
+		msg.post("game:/player#box", "last_chance")
+	else
+		msg.post("game:/player#box", "game_over")
+	end
 end
 
 local function rewarded_error(self, err)
-	msg.post("revive:/go#revive", "ad_error")
+	
 end
 
 function on_message(self, message_id, message)
 	if message_id == hash("show_rewarded_video") then
+		print("show_rewarded_video")
 		yagames.adv_show_rewarded_video({
 			open = rewarded_open,
 			rewarded = rewarded_rewarded,

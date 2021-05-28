@@ -106,6 +106,9 @@ function on_message(self, message_id, message, sender)
 	if message_id==hash("last_chance") then
 		last_chance()
 	elseif message_id==hash("game_over") then
+		print("--------------------------------------")
+		isLastChance=true
+		G.SetGameOver(false)
 		game_over()
 	end
 end

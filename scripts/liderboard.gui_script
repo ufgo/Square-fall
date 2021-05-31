@@ -5,7 +5,19 @@ local scores_txt={}
 local G = require("scripts.global")
 local ya_scores = require("scripts.yandex.ya_leaderboards")
 
+local function loading_anim()
+    local one=gui.get_node("one")
+    local two=gui.get_node("two")
+    local three=gui.get_node("three")
+
+    gui.animate(one, "position.y", 120, gui.EASING_INQUAD, 0.7, 0, nil, gui.PLAYBACK_LOOP_PINGPONG)
+    gui.animate(two, "position.y", 120, gui.EASING_INQUAD, 0.7,0.2, nil, gui.PLAYBACK_LOOP_PINGPONG)
+    gui.animate(three, "position.y", 120, gui.EASING_INQUAD, 0.7,0.5, nil, gui.PLAYBACK_LOOP_PINGPONG)
+end
+
 function init(self)
+    loading_anim()
+    
     print(msg.url())
     msg.post(".", "acquire_input_focus")
     ya_scores.get_entries_handler(self)
@@ -35,6 +47,11 @@ local function set_liderboard(result)
             gui.set_text(users_txt[k], "Логин скрыт")
         end
     end
+    gui.set_scale(gui.get_node("loading"), vmath.vector3(0,0,0))
+
+    gui.cancel_animation(gui.get_node("one"), "position.y")
+    gui.cancel_animation(gui.get_node("two"), "position.y")
+    gui.cancel_animation(gui.get_node("three"), "position.y")
 end
 
 function on_message(self, message_id, message, sender)

@@ -60,7 +60,8 @@ sdk_init_options = { orientation: { value: "portrait", lock: true } }
 service_worker_url = sw.js
 
 [html5]
-cssfile = /builtins/manifests/web/dark_theme.css
+cssfile = /assets/html_bar/bar_theme.css
 show_fullscreen_button = 0
 show_made_with_defold = 0
+htmlfile = /assets/html_bar/bar_template.html
 

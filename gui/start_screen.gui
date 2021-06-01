@@ -1,9 +1,5 @@
 script: "/scripts/start_screen.gui_script"
 fonts {
-  name: "score"
-  font: "/assets/fonts/score.font"
-}
-fonts {
   name: "score_big"
   font: "/assets/fonts/score_big.font"
 }

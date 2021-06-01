@@ -2,7 +2,7 @@
 const cachePrefix = "lumber-chop";
 
 // 2. Increment the version every time you publish your game!
-const cacheName = cachePrefix + "-v48";
+const cacheName = cachePrefix + "-v49";
 
 const cacheList = [
     "https://yandex.ru/games/sdk/v2",

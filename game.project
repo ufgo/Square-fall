@@ -64,4 +64,5 @@ cssfile = /assets/html_bar/bar_theme.css
 show_fullscreen_button = 0
 show_made_with_defold = 0
 htmlfile = /assets/html_bar/bar_template.html
+splash_image = /assets/images/preload.gif
 

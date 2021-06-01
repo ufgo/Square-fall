@@ -1,5 +1,6 @@
 local monarch = require "monarch.monarch"
 local transitions = require "monarch.transitions.gui"
+local isNo=false
 
 function init(self)
     print(msg.url())
@@ -31,8 +32,14 @@ function on_input(self, action_id, action)
             monarch.hide(hash("last_chance"))
         end
         if gui.pick_node(btn_no, action.x, action.y) then 
-            msg.post("game:/player#box", "game_over")
+            isNo=true
             monarch.hide(hash("last_chance"))
         end
+    end
+end
+
+function final(self)
+    if isNo then
+        msg.post("game:/player#box", "game_over")
     end
 end

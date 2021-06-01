@@ -4,13 +4,20 @@ local G=require("scripts.global")
 local score=0
 local monarch = require "monarch.monarch"
 local defsave = require("defsave.defsave")
+local isSound=false
 go.property("isplayer", true)
 local isLastChance=false
+
+local function play_sound_file(v)
+	if isSound then
+		sound.play(v)
+	end
+end
 
 local function forward_animation(speed)
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 870, go.EASING_LINEAR, speed,0,
 	function() 
-		sound.play("main:/sounds#hit")
+		play_sound_file("main:/sounds#hit")
 		back_animation(player_speed)
 		back=true
 	end)
@@ -19,7 +26,7 @@ end
 function back_animation(speed)
 	go.animate(go.get_id(), "position.x", go.PLAYBACK_ONCE_FORWARD, 210, go.EASING_LINEAR, speed,0,
 	function() 
-		sound.play("main:/sounds#hit")
+		play_sound_file("main:/sounds#hit")
 		forward_animation(player_speed)
 		back=false
 	end)
@@ -47,24 +54,31 @@ local function game_over()
 			go.animate(go.get_id(), "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0,0,0), go.EASING_LINEAR, 0.5)
 			go.set_position(go.get_position(go.get_id()),"particles")
 			particlefx.play("/particles#player_destroy")
-			sound.play("main:/sounds#explosion")
+			play_sound_file("main:/sounds#explosion")
 			--msg.post("main:/transition#transition", "slide_in_top",{url="/game"})
 			timer.delay(1.0, false, function()msg.post("game:/container#transition", "slide_in_top")end)
 		else
-			timer.delay(0.2, false, function()monarch.show(hash("last_chance"))end)
+			timer.delay(0.2, false, function()monarch.show(hash("last_chance"))
+			play_sound_file("main:/sounds#dialog")
+		end)
 		end
 		
 		G.SetScore(score)
+		print("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
+		print(G.GetScore())
 	end
 end
 
 local function add_score()
 	score=score+1
 	label.set_text("/score#label", score)
-	sound.play("main:/sounds#collect")
+	play_sound_file("main:/sounds#collect")
 end
 
 function init(self)
+	if defsave.get("save", "volume") or defsave.get("save", "volume")==nil then
+		isSound=true
+	end
 	print("player script: "..msg.url())
 	G.SetGameOver(false)
 	--particlefx.play("#player_destroy")

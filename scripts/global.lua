@@ -6,6 +6,16 @@ local badDomain=false
 local best_score
 local lider_board={}
 local isHelp=true
+local adsCounter=0
+
+function M.GetAdsCounter()
+	return adsCounter
+end
+
+function M.SetAdsCounter(v)
+	adsCounter=v
+end
+
 
 function M.GetHelp()
 	return isHelp

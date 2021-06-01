@@ -49,7 +49,7 @@ function init(self)
 
     if G.GetScore()>3 then
         G.SetAdsCounter(G.GetAdsCounter()+1)
-        if G.GetAdsCounter()==5 then
+        if G.GetAdsCounter()==3 then
             G.SetAdsCounter(0)
             msg.post("main:/yandex#yandex_ads", "show_fullscreen_adv")
         end

@@ -23,69 +23,7 @@ background_color {
 }
 nodes {
   position {
-    x: 537.0
-    y: 1761.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 0.06666667
-    y: 0.7019608
-    z: 1.0
-    w: 1.0
-  }
-  type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
-  text: "\320\233\321\203\321\207\321\210\320\270\320\265"
-  font: "text"
-  id: "text"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
-  layer: ""
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 0.0
-  shadow_alpha: 0.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-}
-nodes {
-  position {
-    x: -6.0
+    x: -51.0
     y: 26.0
     z: 0.0
     w: 1.0
@@ -320,7 +258,7 @@ nodes {
 }
 nodes {
   position {
-    x: 546.0
+    x: 667.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -564,7 +502,7 @@ nodes {
 }
 nodes {
   position {
-    x: 546.0
+    x: 667.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -808,7 +746,7 @@ nodes {
 }
 nodes {
   position {
-    x: 546.0
+    x: 667.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -1052,7 +990,7 @@ nodes {
 }
 nodes {
   position {
-    x: 546.0
+    x: 667.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -1296,7 +1234,7 @@ nodes {
 }
 nodes {
   position {
-    x: 546.0
+    x: 667.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -1540,7 +1478,7 @@ nodes {
 }
 nodes {
   position {
-    x: 546.0
+    x: 667.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -1784,7 +1722,7 @@ nodes {
 }
 nodes {
   position {
-    x: 546.0
+    x: 667.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -2028,7 +1966,7 @@ nodes {
 }
 nodes {
   position {
-    x: 546.0
+    x: 667.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -2272,7 +2210,7 @@ nodes {
 }
 nodes {
   position {
-    x: 546.0
+    x: 667.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -2516,7 +2454,7 @@ nodes {
 }
 nodes {
   position {
-    x: 546.0
+    x: 667.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -2642,7 +2580,7 @@ nodes {
 }
 nodes {
   position {
-    x: 425.0
+    x: 500.0
     y: 1150.0
     z: 0.0
     w: 1.0
@@ -2859,6 +2797,69 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 590.0
+    y: 1761.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.06666667
+    y: 0.7019608
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "\320\233\321\203\321\207\321\210\320\270\320\265"
+  font: "text"
+  id: "text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "table"
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 0.0
+  shadow_alpha: 0.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
 }
 nodes {
   position {

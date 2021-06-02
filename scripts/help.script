@@ -1,8 +1,9 @@
 local G = require("scripts.global")
 
 function init(self)
+	go.set(go.get_id(), "position.z", -1)
 
-	go.set("#help_txt", "color", vmath.vector4(1,1,1,0))
+	go.set("#help_txt", "color", vmath.vector4(0.08, 0.09, 0.12,1.0))
 	
 	if G.GetHelp() then
 		label.set_text("#help_txt", "тап/клик для\nпереключения направления")
@@ -11,19 +12,19 @@ function init(self)
 		vmath.vector4(1,1,1,1), go.EASING_INOUTQUAD, 1.0,1,
 		function()
 			go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
-			vmath.vector4(1,1,1,0), go.EASING_INOUTQUAD, 1.0,0,
+			vmath.vector4(0.08, 0.09, 0.12,1.0), go.EASING_INOUTQUAD, 1.0,0,
 			function()
 				go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
 				vmath.vector4(1,1,1,1), go.EASING_INOUTQUAD, 1.0,0,
 				function()
 					go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
-					vmath.vector4(1,1,1,0), go.EASING_INOUTQUAD, 1.0,0,
+					vmath.vector4(0.08, 0.09, 0.12,1.0), go.EASING_INOUTQUAD, 1.0,0,
 					function()
 						go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
 						vmath.vector4(1,1,1,1), go.EASING_INOUTQUAD, 1.0,0,
 						function()
 							go.animate("#help_txt", "color", go.PLAYBACK_ONCE_FORWARD, 
-							vmath.vector4(1,1,1,0), go.EASING_INOUTQUAD, 1.0,0)
+							vmath.vector4(0.08, 0.09, 0.12,1.0), go.EASING_INOUTQUAD, 1.0,0)
 						end)
 					end)
 				end)

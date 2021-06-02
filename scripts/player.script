@@ -70,6 +70,11 @@ local function game_over()
 end
 
 local function add_score()
+	go.animate("/score#label", "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(0.7,0.7,0.7), go.EASING_INQUAD, 0.2,0,
+	function()
+		go.animate("/score#label", "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(1.0,1.0,1.0), go.EASING_INQUAD, 0.2)
+	end
+)
 	score=score+1
 	label.set_text("/score#label", score)
 	play_sound_file("main:/sounds#collect")

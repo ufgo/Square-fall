@@ -41,10 +41,10 @@ function init(self)
     print("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
     print(G.GetScore())
     local btn_volume=gui.get_node("volume")
-    if defsave.get("save", "volume") then
-        gui.play_flipbook(btn_volume, "volume_on")
-    else
+    if defsave.get("save", "volume")==false then
         gui.play_flipbook(btn_volume, "volume_off")
+    else
+        gui.play_flipbook(btn_volume, "volume_on")
     end
 
     if G.GetScore()>3 then
@@ -97,13 +97,13 @@ function on_input(self, action_id, action)
             print("volume")
             
             
-            if defsave.get("save", "volume") then
-                defsave.set("save", "volume", false)
-                gui.play_flipbook(btn_volume, "volume_off")
-                print (defsave.get("save", "volume"))
-            else
+            if defsave.get("save", "volume")==false then
                 defsave.set("save", "volume", true)
                 gui.play_flipbook(btn_volume, "volume_on")
+                print (defsave.get("save", "volume"))
+            else
+                defsave.set("save", "volume", false)
+                gui.play_flipbook(btn_volume, "volume_off")
                 print (defsave.get("save", "volume"))
             end
 

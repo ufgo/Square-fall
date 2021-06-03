@@ -4,7 +4,7 @@ local defsave = require("defsave.defsave")
 
 function init(self)
 	print(msg.url())
-	print("Version: 53")
+	print("Version: 54")
 	window.center()
 	window.resize()
 	

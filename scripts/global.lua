@@ -7,6 +7,16 @@ local best_score
 local lider_board={}
 local isHelp=true
 local adsCounter=0
+local isInit=false
+
+function M.GetInit()
+	return isInit
+end
+
+function M.SetInit(v)
+	isInit=v
+end
+
 
 function M.GetAdsCounter()
 	return adsCounter

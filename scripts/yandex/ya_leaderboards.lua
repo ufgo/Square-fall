@@ -20,7 +20,7 @@ local TABLE_NAME = "top"
 
 function M.get_entries_handler(self)
     local options = {
-        includeUser = true,
+        includeUser = false,
         quantityAround = 10,
         quantityTop = 10,
         getAvatarSrc = "small",
@@ -30,6 +30,9 @@ function M.get_entries_handler(self)
         if not err then
             G.setLiderBoard(result)
             msg.post("liderboard:/go#liderboard", "set_liderboard")
+        else
+            print("some error in liderboard:")
+            pprint(err)
         end
     end)
 end

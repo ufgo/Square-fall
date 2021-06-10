@@ -5,6 +5,25 @@ local defsave = require("defsave.defsave")
 local ya_scores = require("scripts.yandex.ya_leaderboards")
 local ya_score=0
 
+local function unAuth()
+    gui.set_text(gui.get_node("score"), tostring(G.GetScore()))
+    
+    print("unauth score: "..tostring(G.GetScore()))
+    print(defsave.get("save", "score"))
+
+    
+    if defsave.get("save", "score")==nil or G.GetScore()>defsave.get("save", "score") then
+        if G.GetScore()~=0 then
+            defsave.set("save", "score", G.GetScore())
+            gui.set_text(gui.get_node("top_score"), "Новый рекорд!")
+            defsave.save("save")
+        end
+    else
+        gui.set_text(gui.get_node("top_score"), "ЛУЧШИЙ "..tostring(defsave.get("save", "score")))    
+    end
+    gui.set_scale(gui.get_node("loading"), vmath.vector3(0,0,0))
+end
+
 local function set_scores(score)
     ya_score=score
 
@@ -13,12 +32,17 @@ local function set_scores(score)
 
     gui.set_text(gui.get_node("score"), tostring(G.GetScore()))
 
-    if G.GetScore()>ya_score or ya_score==nil then
-        ya_scores.set_score_handler(self, G.GetScore())
-        gui.set_text(gui.get_node("top_score"), "Новый рекорд!")
-    else
-        gui.set_text(gui.get_node("top_score"), "ЛУЧШИЙ "..tostring(ya_score))
+    if G.GetInit() then
+        if ya_score==nil or G.GetScore()>ya_score then
+            if G.GetScore()~=0 then
+                ya_scores.set_score_handler(self, G.GetScore())
+                gui.set_text(gui.get_node("top_score"), "Новый рекорд!")
+            end
+        else
+            gui.set_text(gui.get_node("top_score"), "ЛУЧШИЙ "..tostring(ya_score))
+        end
     end
+
     gui.set_scale(gui.get_node("loading"), vmath.vector3(0,0,0))
 
     gui.cancel_animation(gui.get_node("one"), "position.y")
@@ -63,8 +87,11 @@ function init(self)
     self.transition = transitions.create() -- note that no node is passed to transition.create()!
     .show_in(gui.get_node("root"), transitions.slide_in_bottom, gui.EASING_OUTQUAD, 0.5, 0.1)
     .show_out(gui.get_node("root"), transitions.slide_out_top, gui.EASING_INQUAD, 0.5, 0)
-
-    ya_scores.get_player_entry_handler()
+    if G.GetInit() then
+        ya_scores.get_player_entry_handler()
+    else
+        unAuth()
+    end
 end
 
 function final(self)

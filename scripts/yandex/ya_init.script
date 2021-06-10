@@ -7,6 +7,16 @@ local function init_handler(self, err)
 	else
 		msg.post("main:/yandex#yandex_ads", "show_fullscreen_adv")
 		ya_scores.init_handler()
+
+		yagames.player_init(options, function(self, err)
+			print("yagames.player_init:", err or "OK!")
+
+			if not err then
+				msg.post("main:/main#main", "player_ok")
+			end
+		end)
+
+		
 	end
 end
 

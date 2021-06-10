@@ -1,10 +1,11 @@
 local window=require("scripts.window")
 local monarch = require "monarch.monarch"
 local defsave = require("defsave.defsave")
+local G=require("scripts.global")
 
 function init(self)
 	print(msg.url())
-	print("Version: 54")
+	print("Version: 71")
 	window.center()
 	window.resize()
 	
@@ -22,5 +23,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("init_monarch") then
 		monarch.show(hash("start_screen"))
 		--monarch.show(hash("game_over"))
+	elseif message_id == hash("player_ok") then
+		G.SetInit(true)
 	end
 end

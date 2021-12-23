@@ -16,6 +16,8 @@ List of extensions used:
 - defold-yagames
 - defsave
 
+Also in the game I used custom HTML template that you can use in your games)
+
 You can run this example here [Square Fall](https://yandex.ru/games/play/165641).
 
 ---

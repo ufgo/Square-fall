@@ -18,6 +18,6 @@ List of extensions used:
 
 Also in the game I used custom HTML template that you can use in your games)
 
-You can run this example here [Square Fall](https://yandex.ru/games/play/165641).
+You can run this example here [Square Fall](http://yandex.ru/games/play/165641?utm_source=from_git_source).
 
 ---

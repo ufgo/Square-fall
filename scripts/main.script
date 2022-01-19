@@ -4,8 +4,6 @@ local defsave = require("defsave.defsave")
 local G=require("scripts.global")
 
 function init(self)
-	print(msg.url())
-	print("Version: 71")
 	window.center()
 	window.resize()
 	

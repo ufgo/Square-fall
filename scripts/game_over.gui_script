@@ -62,7 +62,6 @@ end
 
 
 function init(self)
-    print("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
     print(G.GetScore())
     local btn_volume=gui.get_node("volume")
     if defsave.get("save", "volume")==false then

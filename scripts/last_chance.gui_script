@@ -3,7 +3,6 @@ local transitions = require "monarch.transitions.gui"
 local isNo=false
 
 function init(self)
-    print(msg.url())
     msg.post(".", "acquire_input_focus")
     self.transition = transitions.create() -- note that no node is passed to transition.create()!
     .show_in(gui.get_node("dialog"), transitions.scale_in, gui.EASING_OUTQUAD, 0.3, 0)
